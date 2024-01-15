@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Screen Recorder</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Orbitron'>
+  </head>
+  <body>
+    <!-- <video class="video" width="600px" controls></video> -->
+    <div style="text-align:center;margin: 3rem 6rem">
+      <p><label for="file_name">File Name:</label>
+      <input type="text" id="file_name" name="file_name" value="video" /> &nbsp; .webm</p>
+      <p>
+        <button class="record-btn">Record</button>
+        <button class="pause-btn hidden" id="pause-btn">Pause</button>
+      </p>
+      <div>
+        <!-- Timer: <span id="timer">0</span> -->
+        <canvas id="canvas"></canvas>
+        <div id="timer" class="clock">00:00:00</div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+    <style>
+      input {
+        border-radius: 4px;
+        height: 29px;
+        line-height: 10px;
+        padding: 2px 6px;
+        width: 15vw;
+      }
+      button {
+        border-radius: 4px;
+        padding: 1rem 3rem;
+        cursor: pointer;
+        border: none;
+        background-color: blue;
+        color: white;
+        font-weight: 700;
+        font-size: 19px;
+      }
+      button:active {
+        position: relative;
+        top: 3px;
+        left: -3px;
+      }
+      .hidden {
+        display: none
+      }
+      .show {
+        display: block
+      }
+      .clock {
+        background-color: black;
+        color: #17D4FE;
+        font-size: 60px;
+        font-family: Orbitron;
+        letter-spacing: 7px;
+      }
+      #canvas {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 100px;
+      }
+    </style>
+  </body>
+</html>
