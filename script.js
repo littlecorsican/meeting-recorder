@@ -20,10 +20,18 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         audio: true
       })
 
+      audioStream = await navigator.mediaDevices.getUserMedia({
+        audio: true
+      })
+
+      combinedStream = new MediaStream([
+        ...videoStream.getTracks(), ...audioStream.getTracks()
+      ])
+
 
       // WHEN STREAM ENDS, CLOSES STOP SHARING BBAR
       videoStream.getVideoTracks()[0].addEventListener('ended', () => {
-        videoStream.getTracks().forEach(track => track.stop())
+        combinedStream.getTracks().forEach(track => track.stop())
         endCountDown()
       })
 
@@ -33,7 +41,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
       const mime = MediaRecorder.isTypeSupported("video/webm; codecs=vp9") 
       ? "video/webm; codecs=vp9" 
       : "video/webm"
-      mediaRecorder = new MediaRecorder(videoStream, {
+      mediaRecorder = new MediaRecorder(combinedStream, {
         mimeType: mime
       })
       
@@ -83,7 +91,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
       mediaRecorder.stop()
       endCountDown()
 
-      videoStream.getTracks().forEach(track => track.stop())
+      combinedStream.getTracks().forEach(track => track.stop())
     }
   })
 
