@@ -4,6 +4,7 @@ const file_name = document.querySelector("#file_name")
 const timerDOM = document.querySelector("#timer")
 
 document.addEventListener("DOMContentLoaded", async (event) => {
+  console.log("DOM fully loaded and parsed");
   let videoStream = null
 
   let mediaRecorder = null
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
         video: true,
         audio: true
       })
+
 
       // WHEN STREAM ENDS, CLOSES STOP SHARING BBAR
       videoStream.getVideoTracks()[0].addEventListener('ended', () => {
@@ -43,6 +45,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
 
       mediaRecorder.addEventListener('error', function(e) {
         //ERROR EVENT HANDLING
+        console.log(e)
         alert("Error, please refresh and try again")
       })
   
@@ -55,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async (event) => {
   
         // let video = document.querySelector("video")
         // video.src = url
-  
+        document.getElementById("pause-btn").className = "pause-btn hidden"
         let a = document.createElement('a')
         a.href = url
         a.download = file_name.value || 'video.webm'
